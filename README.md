@@ -24,5 +24,6 @@ npm run e2e
 
 Write your components and your tests in `src/components/*` 
 
+### TODO
 
-
+Fix TypeScript and build errors
