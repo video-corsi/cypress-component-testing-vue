@@ -1,14 +1,19 @@
 /// <reference types="cypress" />
 
-import { mount } from 'cypress/vue';
+// https://github.com/cypress-io/cypress/issues/26628
+// Not able to use Component Testing with Vite/Vue after upgrade to TypeScript 5 #26628 
+// import { mount } from 'cypress/vue';
+
+// Bug: Overload ts error when prop and slot exist together #2054 
+// https://github.com/vuejs/test-utils/issues/2054
 import Panel from './Panel.vue';
 
 describe('<Panel />', () => {
   it('renders', () => {
-    mount(Panel)
+    cy.mount(Panel)
   })
   it("should display title", () => {
-    mount(Panel, {
+    cy.mount(Panel, {
       props: {
         title: 'Hello'
       }
@@ -17,7 +22,7 @@ describe('<Panel />', () => {
   });
 
   it("should display content when the component is mount", () => {
-    mount(Panel, {
+    cy.mount(Panel, {
       props: {
         title: 'Hello',
       },
@@ -29,7 +34,7 @@ describe('<Panel />', () => {
   });
 
   it("should hide children when title bar is clicked", () => {
-    mount(Panel, {
+    cy.mount(Panel, {
       props: {
         title: 'Hello',
         isOpen: false
@@ -44,7 +49,7 @@ describe('<Panel />', () => {
   });
 
   it("should toggle children when title bar is clicked twice", () => {
-    mount(Panel, {
+    cy.mount(Panel, {
       props: {
         title: 'Hello',
       },
@@ -64,7 +69,7 @@ describe('<Panel />', () => {
 
 
     it("should display an icon in the title bar", () => {
-      mount(Panel, {
+      cy.mount(Panel, {
         props: {
           title: 'Hello',
           icon: '⭐️'
@@ -80,7 +85,7 @@ describe('<Panel />', () => {
 
     it("should invoke a function when icon is clicked", () => {
       const onClickSpy = cy.spy().as("onClickSpy"); // alias
-      mount(Panel, {
+      cy.mount(Panel, {
         props: {
           title: 'Hello',
           icon: '⭐️',
@@ -97,8 +102,7 @@ describe('<Panel />', () => {
 
 
     it('should not toggle the title bar when the icon is clicked', () => {
-
-      mount(Panel, {
+      cy.mount(Panel, {
         props: {
           title: 'Hello',
           icon: '⭐️',
@@ -113,7 +117,7 @@ describe('<Panel />', () => {
     })
 
     it('should hide content if the open property is set to false', () => {
-      mount(Panel, {
+      cy.mount(Panel, {
         props: {
           title: 'Hello',
           isOpen: false
@@ -128,7 +132,7 @@ describe('<Panel />', () => {
 
 
     it('should show content if the open property is set to true', () => {
-      mount(Panel, {
+      cy.mount(Panel, {
         props: {
           title: 'Hello',
           isOpen: true
