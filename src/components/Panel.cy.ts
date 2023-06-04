@@ -1,6 +1,12 @@
 /// <reference types="cypress" />
 
-import { mount } from 'cypress/vue';
+// https://github.com/cypress-io/cypress/issues/26628
+// Not able to use Component Testing with Vite/Vue after upgrade to TypeScript 5 #26628 
+// import { mount } from 'cypress/vue';
+
+// Bug: Overload ts error when prop and slot exist together #2054 
+// https://github.com/vuejs/test-utils/issues/2054
+import { mount } from '@vue/test-utils'
 import Panel from './Panel.vue';
 
 describe('<Panel />', () => {
