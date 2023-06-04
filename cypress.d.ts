@@ -3,6 +3,14 @@ import { mount } from "cypress/vue";
 declare global {
   namespace Cypress {
     interface Chainable {
+      /**
+       * Work around for TS bug on cypress
+       * this solve as any, that's why can build and run without errors
+       * 
+       * should be removed on release of this ==> 
+       * https://github.com/vuejs/test-utils/issues/2054
+       * 
+       */
       mount: Mount<typeof mount>;
       /**
        * Custom command to select DOM element by `data-cy` attribute.
