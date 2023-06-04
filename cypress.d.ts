@@ -10,6 +10,9 @@ declare global {
        * should be removed on release of this ==> 
        * https://github.com/vuejs/test-utils/issues/2054
        * 
+       * @issue {vue test utils}
+       * diff => https://github.com/cypress-io/cypress/pull/25538/files
+       * 
        */
       mount: Mount<typeof mount>;
       /**
@@ -24,4 +27,3 @@ declare global {
     }
   }
 }
- f
