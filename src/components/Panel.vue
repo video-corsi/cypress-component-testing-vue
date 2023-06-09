@@ -1,35 +1,32 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { ref } from 'vue'
 
-const props = defineProps({
-  title: {
-    type: String,
-    required: true,
-  },
-  icon: String,
-  isOpen: {
-    type: Boolean,
-    default: true
-  },
-});
+const props = defineProps<{
+  title: string
+  icon: string
+  isOpen: boolean
+}>()
 
-const isOpen = ref(props.isOpen);
+const emit = defineEmits<{
+  (e: 'iconClick'): void
+}>()
+
+const isClosed = ref(!props.isOpen)
+
+function onClick() {
+  isClosed.value = !isClosed.value
+  emit('iconClick')
+}
 </script>
-
 
 <template>
   <div>
-    <div
-      class="flex justify-between bg-slate-800 text-white p-3"
-      @click="isOpen = !isOpen"
-    >
+    <div class="flex justify-between bg-slate-800 text-white p-3" @click="onClick">
       {{ title }}
-      <div
-          @click.stop="$emit('iconClick')"
-      >{{icon}}</div>
+      <div>{{ icon }}</div>
     </div>
 
-    <div class="p-3 bg-slate-200" v-if="isOpen">
+    <div class="p-3 bg-slate-200" v-if="!isClosed">
       <slot />
     </div>
   </div>
